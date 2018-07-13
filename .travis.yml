@@ -3,11 +3,11 @@ php:
   - '5.6'
 before_script:
   ## Composer
-  ## - curl -s http://getcomposer.org/installer | php
-  ## - php composer.phar install
+  - composer self-update
+  - composer install --no-interaction
   ## PHP_CodeSniffer
-  ##- composer global require "squizlabs/php_codesniffer=*"
-  ##- phpenv rehash
+  - pear install pear/PHP_CodeSniffer
+  - phpenv rehash
   ## PHP Copy/Paste Detector
   - curl -o phpcpd.phar https://phar.phpunit.de/phpcpd.phar
   ## PHP Mess Detector
@@ -21,14 +21,14 @@ before_script:
   - curl -o phploc.phar https://phar.phpunit.de/phploc.phar
 script:
   ## PHP_CodeSniffer
-  ##- phpcs --standard=PSR1 /
-  ##- phpcs --standard=PSR2 /
+  - phpcs --standard=PSR1 /
+  - phpcs --standard=PSR2 /
   ## PHP Copy/Paste Detector
-  - php phpcpd.phar --verbose ./
+  - php phpcpd.phar --verbose /
   ## PHP Mess Detector
-  - phpmd ./ text codesize,unusedcode,naming,design
+  - phpmd / text codesize,unusedcode,naming,design
   ## PHPLOC
-  - php phploc.phar ./
+  - php phploc.phar /
 notifications:
   email:
     - fchometon@lesnetworkeurs.com
